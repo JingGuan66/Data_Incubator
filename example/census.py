@@ -3,7 +3,7 @@ import requests
 ri_male = requests.get("https://api.census.gov/data/2016/acs/acs1?get=NAME,B01001_002E&for=state:44")
 print ri_male.json()
 print ri_male.json()[1][1]
-female = requests.get("https://api.census.gov/data/2016/acs/acs1?get=NAME,B01001_026E&for=state:44")
+ri_female = requests.get("https://api.census.gov/data/2016/acs/acs1?get=NAME,B01001_026E&for=state:44")
 #Rhode Island total population of male and famale 
 ri_county_male =requests.get("https://api.census.gov/data/2016/acs/acs1?get=NAME,B01001_002E&for=county:*&in=state:44")
 #print ri_county_male.text
@@ -11,13 +11,14 @@ ri_county_female =requests.get("https://api.census.gov/data/2016/acs/acs1?get=NA
 print ri_county_female.json()
 
 print '***************'
+
 '''
-'''e = [['ri_male','B01001_002E'],
+e = [['ri_male','B01001_002E'],
      ['ri_female','B01001_026E']
     ]
 for i in e:
-    print 'https://api.census.gov/data/2016/acs/acs1?get=NAME' + i[1] + '&for=state:44'
-'''  
+    print ('https://api.census.gov/data/2016/acs/acs1?get=NAME,' + i[1] + '&for=state:44')
+ 
 
 w = [['ct','09'],['me','23'],['ma','25'],['nh','33'],['ri', '44'],['vt','50']
     ]
@@ -33,6 +34,6 @@ for j in w:
         index.append(i)
 #print index
 for i in index:
-    print i
-    
+    print (i)
+
     
