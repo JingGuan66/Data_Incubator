@@ -1,0 +1,67 @@
+{% extends "analyze_visual/base.html" %}
+
+{% block main %}
+<div id="container"></div>
+{% endblock %}
+
+
+{% block javascript %}
+{{ super }}
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.highcharts.com/maps/highmaps.js"></script>
+<script src="https://code.highcharts.com/maps/modules/data.js"></script>
+<script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/maps/modules/offline-exporting.js"></script>
+<script>
+    
+// Prepare random data
+var data = [
+{% for statepop in states%}["{{statepop.state.state_name}}",{{statepop.population}}],{% endfor %}
+];
+$.getJSON('https://data-incubator-yangx.c9users.io/geo_api?geo_type=all_state',
+//$.getJSON('https://cdn.rawgit.com/highcharts/highcharts/057b672172ccc6c08fe7dbb27fc17ebca3f5b770/samples/data/germany.geo.json',
+function (geojson) {
+
+    // Initiate the chart
+    Highcharts.mapChart('container', {
+        chart: {
+            map: geojson
+        },
+
+        title: {
+            text: 'GeoJSON in Highmaps'
+        },
+
+        mapNavigation: {
+            enabled: true,
+            buttonOptions: {
+                verticalAlign: 'bottom'
+            }
+        },
+
+        colorAxis: {
+            tickPixelInterval: 100
+        },
+
+        series: [{
+            data: data,
+            keys: ['name', 'value'],
+            joinBy: 'name',
+            name: 'Random data',
+            states: {
+                hover: {
+                    color: '#a4edba'
+                }
+            },
+            dataLabels: {
+                enabled: true,
+                format: '{point.properties.postal}'
+            }
+        }]
+    });
+});
+    
+</script>
+
+
+{% endblock %}
