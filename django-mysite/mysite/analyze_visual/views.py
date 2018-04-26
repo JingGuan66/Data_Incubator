@@ -4,14 +4,17 @@ from django.template import loader
 from django.http import JsonResponse
 from data_scraping.models import State, County, StatePop, CountyPop, Indicator
 import json
+from analyze_visual.models import Visual
 # Create your views here.
 
 def index(request):
     #latest_question_list = Question.objects.order_by('-pub_date')[:5]
     template = loader.get_template('analyze_visual/home.html')
-    indicator = Indicator.objects.get(indicator_name='TotalPop')
+    visual = Visual.objects.all().order_by('order')
     context = {
-        'states': StatePop.objects.filter(indicator=indicator)
+        'visual': visual,
+        'geo_type':'all_state',
+        'states':State.objects.all().order_by("state_name")
         #'latest_question_list': latest_question_list,
     }
     return HttpResponse(template.render(context, request))
