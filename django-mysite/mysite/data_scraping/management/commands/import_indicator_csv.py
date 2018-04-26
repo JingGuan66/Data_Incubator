@@ -14,7 +14,7 @@ class Command(BaseCommand):
         filename = "indicator_csv/import_indicator.csv"
         my_file = Path(filename)
         if my_file.exists():
-            with open(filename, 'rb') as f:
+            with open(filename, 'r') as f:
                 reader = csv.reader(f)
                 for row in reader:
                     indicator_id = row[0]

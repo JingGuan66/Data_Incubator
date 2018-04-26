@@ -27,7 +27,7 @@ class StatePop(models.Model):
     state = models.ForeignKey(State,on_delete=models.CASCADE)
     indicator = models.ForeignKey('Indicator',on_delete=models.CASCADE)
     year = models.ForeignKey(Year,on_delete=models.CASCADE)
-    population = models.IntegerField(null=True, blank=True)
+    population = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
     def __str__(self):
         return "%s"%self.population   
         
@@ -35,7 +35,7 @@ class CountyPop(models.Model):
     county = models.ForeignKey(County,on_delete=models.CASCADE)
     year = models.ForeignKey(Year,on_delete=models.CASCADE)
     indicator = models.ForeignKey('Indicator',on_delete=models.CASCADE)
-    population = models.IntegerField(null=True, blank=True)
+    population = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
     def __str__(self):
         return "%s"%self.population
         
