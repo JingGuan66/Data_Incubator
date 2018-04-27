@@ -19,5 +19,6 @@ from analyze_visual import views
 urlpatterns = [
     url(r'^$', views.index, name="index"),
     url(r'^jing$', views.jing, name="jing"),
-    url(r'^geo_api', views.geo_api, name="geo_api")
+    url(r'^geo_api', views.geo_api, name="geo_api"),
+    url(r'^state/(?P<state_short_name>\w+)', views.state, name="state"),
 ]
